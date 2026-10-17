@@ -1,0 +1,26 @@
+app = "alirez-xui-2026"
+primary_region = "fra"
+
+[build]
+  image = "ghcr.io/mhsanaei/3x-ui:latest"
+
+[env]
+  XUI_ENABLE_FAIL2BAN = "false"
+
+[mounts]
+  source = "xui_data"
+  destination = "/etc/x-ui"
+
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 2053
+  auto_stop_machines = "off"
+  min_machines_running = 1
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
